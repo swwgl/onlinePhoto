@@ -8,7 +8,8 @@ app.listen(4000);
 app.set("view engine", "ejs");
 
 // 设置post请求参数获取方式
-app.use(express.urlencoded({ extends: true }));
+app.use(express.urlencoded({ extended: true }));
+
 // 设置根目录
 app.use(express.static("./public"));
 // 访问 localhost:4000
