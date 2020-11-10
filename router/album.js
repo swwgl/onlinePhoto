@@ -59,5 +59,28 @@ router.post("/check", function (req, res) {
     });
   });
 });
+
+// 处理get的 /album/deleteablum/xxx请求
+// 删除指定名称的文件夹(xxx)
+// /\/deletealbum\/(\w+)/
+router.get("/deletealbum/:dirName", function (req, res) {
+  var dirName = req.params.dirName.trim();
+  if (dirName == "") {
+    res.send("删除失败!");
+    // res.render("error",{});
+    return;
+  }
+
+  // 调用删除文件夹的方法
+  file.remove("./uploads/" + dirName, function (err) {
+    if (err) {
+      //失败
+      console.log(err);
+      res.send("<h1>删除失败1</h1>");
+      return;
+    }
+    res.redirect("/");
+  });
+});
 // 暴露路由
 module.exports = router;

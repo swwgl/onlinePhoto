@@ -27,8 +27,32 @@ function create(dirName, callback) {
     callback(err);
   });
 }
+/**
+ * 删除指定名称的文件夹
+ * @param {String} path 要被删除的路径
+ */
+function remove(path, callback) {
+  fs.stat(path, function (err, stats) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    if (stats.isFile()) {
+      // 文件的删除
+      fs.unlink(path, function (err) {
+        callback(err);
+      });
+      return;
+    }
+    // 不是文件,删除文件夹
+    fs.rmdir(path, { recursive: true }, function (err) {
+      callback(err);
+    });
+  });
+}
 // 暴露
 module.exports = {
   getContents: getContents,
   create: create,
+  remove: remove,
 };
