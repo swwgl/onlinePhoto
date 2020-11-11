@@ -5,7 +5,7 @@
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>在线相册</title>
+  <title></title>
 
   <!-- Bootstrap -->
   <link href='/css/bootstrap.css' rel='stylesheet'>
@@ -27,7 +27,6 @@
       width: 200px;
       text-align: center;
       margin: 0 8px;
-
     }
 
     .item img {
@@ -56,24 +55,20 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="/pic/upload">上传图片<span class="sr-only">(current)</span></a></li>
           <li><a href="/album/create">新建相册</a></li>
-
         </ul>
-
-
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
   <!-- 展示区域 -->
   <div class="items">
-    <% for(var i=0;i<albums.length;i++){ %>
+    <% for(var i=0;i<imgs.length;i++){ %>
     <div class="item">
-      <a href="/pic/show?dirName=<%= albums[i] %>"><img src="/img/floder1.png"></a>
-      <h4><%= albums[i] %></h4>
-      <a href="/album/deletealbum/<%= albums[i] %>" onclick="del(this)">删除</a>
+      <a href="/<%= dirName %>/<%= imgs[i] %>"><img src="/<%= dirName %>/<%= imgs[i] %>"></a>
+      <h4><%= imgs[i] %></h4>
+      <a href="/album/deletealbum/<%= imgs[i] %>" onclick="del(this)">删除</a>
     </div>
     <% } %>
   </div>
-
   <script>
     function del(ele) {
       event.preventDefault();
@@ -84,7 +79,6 @@
       location.href = $(ele).attr("href");
     }
   </script>
-
   <script src='/js/jquery.min.js'></script>
   <script src='/js/bootstrap.js'></script>
 

@@ -81,6 +81,7 @@
           // console.log(res);
           if (res.status != "success") {
             alert(res.msg);
+            $("input[type=text]").val("");
             return;
           }
           // 创建成功,跳转到首页

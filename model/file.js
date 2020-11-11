@@ -50,9 +50,21 @@ function remove(path, callback) {
     });
   });
 }
+
+/**
+ * 修改文件的路径(重命名)
+ * @param {String} oldPath 旧路径
+ * @param {String} newPath 新路径
+ */
+function change(oldPath, newPath, callback) {
+  fs.rename(oldPath, newPath, function (err) {
+    callback(err);
+  });
+}
 // 暴露
 module.exports = {
   getContents: getContents,
   create: create,
   remove: remove,
+  change: change,
 };

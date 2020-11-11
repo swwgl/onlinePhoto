@@ -15,23 +15,9 @@
       <script src='/js/respond.min.js'></script>
     <![endif]-->
   <style>
-    .items {
-      display: flex;
-      flex-wrap: wrap;
-      width: 80%;
-      margin: auto;
-      background-color: #ccc;
-    }
-
-    .item {
-      width: 200px;
-      text-align: center;
-      margin: 0 8px;
-
-    }
-
-    .item img {
-      width: 200px;
+    div.box {
+      width: 1000px;
+      margin: 70px auto;
     }
   </style>
 </head>
@@ -56,35 +42,35 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="/pic/upload">上传图片<span class="sr-only">(current)</span></a></li>
           <li><a href="/album/create">新建相册</a></li>
-
         </ul>
 
 
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <!-- 展示区域 -->
-  <div class="items">
-    <% for(var i=0;i<albums.length;i++){ %>
-    <div class="item">
-      <a href="/pic/show?dirName=<%= albums[i] %>"><img src="/img/floder1.png"></a>
-      <h4><%= albums[i] %></h4>
-      <a href="/album/deletealbum/<%= albums[i] %>" onclick="del(this)">删除</a>
-    </div>
+  <div class="box">
+    <% if(status==1){%>
+    <h1><%= data %></h1>
+    <% }else{ %>
+    <form class="form" action="/pic/upload" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <h3>请选择相册:</h3>
+        <select name="dirName" id="dir" class="form-control">
+          <% for(var i=0;i<data.length;i++){ %>
+          <option value="<%= data[i] %>"><%= data[i] %></option>
+          <% } %>
+        </select>
+      </div>
+      <div class="form-group">
+        <h4>请选择上传的图片:</h4>
+        <input type="file" name="pic">
+      </div>
+      <div class="form-group">
+        <input type="submit" value="上传" class="btn btn-info">
+      </div>
+    </form>
     <% } %>
   </div>
-
-  <script>
-    function del(ele) {
-      event.preventDefault();
-      var f = confirm("确定要删除该相册码?")
-      if (!f) {
-        return;
-      }
-      location.href = $(ele).attr("href");
-    }
-  </script>
-
   <script src='/js/jquery.min.js'></script>
   <script src='/js/bootstrap.js'></script>
 
