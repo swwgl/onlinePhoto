@@ -81,6 +81,7 @@ router.get("/deletealbum/:dirName", function (req, res) {
     }
     res.redirect("/");
   });
+  
 });
 // 暴露路由
 module.exports = router;

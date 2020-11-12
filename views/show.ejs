@@ -27,10 +27,24 @@
       width: 200px;
       text-align: center;
       margin: 0 8px;
+      position: relative;
     }
 
     .item img {
       width: 200px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      /* display: none; */
+      font-size: 1px;
+    }
+
+    .close:hover {
+      font-size: 20px;
+      color: red;
     }
   </style>
 </head>
@@ -63,9 +77,10 @@
   <div class="items">
     <% for(var i=0;i<imgs.length;i++){ %>
     <div class="item">
-      <a href="/<%= dirName %>/<%= imgs[i] %>"><img src="/<%= dirName %>/<%= imgs[i] %>"></a>
-      <h4><%= imgs[i] %></h4>
-      <a href="/album/deletealbum/<%= imgs[i] %>" onclick="del(this)">删除</a>
+      <a href="/<%= dirName %>/<%= imgs[i] %>"><img src="/<%= dirName %>/<%= imgs[i] %>">
+        <a class="close" href="/pic/deletepic/<%= imgs[i] %>" onclick="del(this)">删除</a>
+        <h4><%= imgs[i] %></h4>
+
     </div>
     <% } %>
   </div>

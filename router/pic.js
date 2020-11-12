@@ -73,6 +73,17 @@ router.post("/upload", function (req, res) {
       // 上传成功,自动调整到上传的文件夹页面
       res.redirect("/pic/show?dirName=" + dirName);
     });
+    // 调用删除文件夹的方法
+    file.remove("./uploads/" + str + ext, function (err) {
+      if (err) {
+        //失败
+        console.log(err);
+        res.send("<h1>删除失败2</h1>");
+        return;
+      }
+      res.redirect("/");
+    });
   });
 });
+
 module.exports = router;
