@@ -7,7 +7,7 @@ const sd = require("silly-datetime");
 router.get("/show", function (req, res) {
   // 获取参数:被点击的文件夹名称
   var dirName = req.query.dirName;
-  console.log(dirName);
+  // console.log(dirName);
   file.getContents("./uploads/" + dirName, function (err, pics) {
     // console.log(err);
     // res.end();
@@ -51,6 +51,7 @@ router.post("/upload", function (req, res) {
     }
     // 获取上传的目标文件夹
     var dirName = fields.dirName;
+    console.log(dirName);
     // 获取上传的图片对象
     var pic = files.pic;
     var oldPath = pic.path;
@@ -73,16 +74,24 @@ router.post("/upload", function (req, res) {
       // 上传成功,自动调整到上传的文件夹页面
       res.redirect("/pic/show?dirName=" + dirName);
     });
-    // 调用删除文件夹的方法
-    file.remove("./uploads/" + str + ext, function (err) {
-      if (err) {
-        //失败
-        console.log(err);
-        res.send("<h1>删除失败2</h1>");
-        return;
-      }
-      res.redirect("/");
-    });
+  });
+});
+router.get("/deletepic/:dirName", function (req, res) {
+  var dirName = req.params.dirName.trim();
+  if (dirName == "") {
+    res.send("删除失败!");
+    // res.render("error",{});
+    return;
+  }
+  // 调用删除图片的方法
+  file.remove("./uplaods/deletepic/" + dirName, function (err) {
+    if (err) {
+      //失败
+      console.log(err);
+      res.send("<h1>删除失败2</h1>");
+      return;
+    }
+    res.redirect("/");
   });
 });
 
