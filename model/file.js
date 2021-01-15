@@ -1,5 +1,4 @@
 // 模型层,数据层,操作文件相关的事情
-const { dir } = require("console");
 const fs = require("fs");
 
 /**
